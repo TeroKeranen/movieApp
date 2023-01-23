@@ -15,6 +15,8 @@ app.set('view engine', 'ejs');
 //
 app.use(express.urlencoded({extended:true})) // allow to parse data
 
+app.use(express.static('public')) // setup css file
+
 
 // require Users db
 const User = require('./models/user');
@@ -69,20 +71,80 @@ passport.use(new localStrategy(function(username, password, done) {
     })
 })) 
 
+// Function that check if user is logged in
+function isLoggedIn(req,res,next) {
+    if (req.isAuthenticated()) return next();
+    res.redirect('/home');
+}
 
+// Function that check if user is loggedOut in
+function isLoggedOut(req,res,next) {
+    if (!req.isAuthenticated()) return next();
+    res.redirect('/login');
+}
+// go to index page
 app.get("/", (req,res) => {
 
     res.render('index', {title: "Home"});
 
 });
 
+// Home is for logged in users
+app.get('/home', (req,res) => {
 
-app.get('/login', (req,res) => {
-    res.render('login')
+    res.render('home', {title: "MovieApp"})
 })
 
-app.post('/login', (req,res) => {
+
+
+app.get('/login', isLoggedOut, (req,res) => {
+    let response = {
+        title: "Login",
+        error: req.query.error
+    }
+    res.render('login', response)
+})
+
+app.get('/setup', async (req,res) => {
+    const exists = await User.exists({username: "admin"});
+
+    if (exists) {
+        res.redirect('/login');
+        return;
+    }
     
+    bcrypt.genSalt(10, function(err,salt) {
+        if (err) return next(err);
+        
+        bcrypt.hash("pass", salt, function(err, hash) {
+            if (err) return next(err);
+            
+            const newAdmin = new User ( {
+                username: "admin",
+                password: hash
+            })
+
+            newAdmin.save();
+
+            res.redirect('/login');
+        })
+    })
+})
+
+// Login post 
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect : '/login?error=true'
+}))
+
+app.get('/logout', function(req,res) {
+    req.logout((err) => {
+        if (err ) {
+            return next(err)
+        }
+
+    })
+    res.redirect('/');
 })
 
 app.get('/register', (req,res) => {

@@ -1,0 +1,31 @@
+
+
+<nav>
+    <div class="nav-center">
+        <div class="nav-header">
+            <h3 class="logo"><a href="/home">MovieApp</a></h3>
+            
+            <div class="nav-toggle">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <ul class="links">
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+
+<script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.links');
+
+    navToggle.addEventListener('click', function () {
+        links.classList.toggle('show-links');
+    })
+
+</script>
