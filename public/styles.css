@@ -21,7 +21,7 @@ main {
 
 
 section {
-    border: 1px solid red;
+    
     text-align: center;
     padding: 3rem;
 }
@@ -96,37 +96,43 @@ section {
 /// Login page ///////////////////
 /////////////////////////////////
 */
-.login-form form {
+
+.login-form form, .register-form form {
+    margin: 0 auto;
     width: 100%;
     padding: 50px 30px;
-    background-image: linear-gradient(to bottom, #0ab4a6, #09705f);
+    background-image: linear-gradient(to bottom, #0ab48f, #09705f);
     max-width: 400px;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
 }
 
-.login-form form h1 {
+.login-form form h1,
+.register-form form h1 {
     color: var(--white);
     font-size: 36px;
     text-transform: uppercase;
     margin-bottom: 30px;
 }
 
-.login-form form label {
+.login-form form label,
+.register-form form label {
     display:block;
     color: var(--white);
     font-size: 14px;
     margin: 10px 0;
 }
 
-.login-form form input {
+.login-form form input,
+.register-form form input {
     appearance: none;
     background: none;
     outline:none;
     border: none;
 }
 
-.login-form form input {
+.login-form form input,
+.register-form form input {
     display:block;
     width: 100%;
     padding: 15px;
@@ -138,16 +144,19 @@ section {
     font-size: 18px;
     font-weight: 300;
 }
-.login-form form input::placeholder {
+.login-form form input::placeholder,
+.register-form form input::placeholder {
     color: var(--white)  
 }
 
-.login-form form input:focus{
+.login-form form input:focus,
+.register-form form input:focus{
     background-color: var(--white);
     box-shadow: 0px 6px 12px rgba(0,0,0,0.2);
 }
 
-.login-form form button {
+.login-form form button,
+.register-form form button {
     display: block;
     border: none;
     width: 100%;
@@ -160,6 +169,7 @@ section {
     color: var(--white);
     font-size: 20px;
     font-weight: 700;
+    cursor:pointer;
 }
 @media screen and (min-width:785px) {
 
