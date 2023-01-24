@@ -103,11 +103,14 @@ app.get("/", (req,res) => {
 // Home is for logged in users
 app.get('/home', isLoggedIn, (req,res) => {
 
-
+    // use these to display welcome text including user name
+    let user = req.user.username
+    let message = `Tervetuloa ${user}`
+    
     if(!req.user) {
         res.render('home', {title: "MovieApp", logged : false})
     } else {
-        res.render('home', {title: "MoviaApp", logged: true})
+        res.render('home', {title: "MoviaApp", logged: true, message: message})
     }
     
     

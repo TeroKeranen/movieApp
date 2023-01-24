@@ -1,5 +1,8 @@
 
-
+:root {
+    --nav-background : rgb(34, 33, 33);
+    --white: #fff;
+}
 
 * {
     padding: 0;
@@ -8,9 +11,21 @@
 }
 
 nav {
-    background-color: rgb(34, 33, 33);
-    color: white;
+    background-color:var(--nav-background);
+    
 }
+main {
+    margin: 0 auto;
+    
+}
+
+
+section {
+    border: 1px solid red;
+    text-align: center;
+    padding: 3rem;
+}
+
 
 .nav-header {
     display:flex;
@@ -20,9 +35,9 @@ nav {
 }
 
 .logo a {
-    font-size: 1.4rem;
+    font-size: 1.9rem;
     letter-spacing: 3px;
-    color: white;
+    color: var(--white);
     text-decoration: none;
 }
 
@@ -30,11 +45,11 @@ nav {
     width: 20px;
     height: 4px;
     margin: 5px;
-    background: white;
+    background: var(--white);
 }
 
 .links a {
-    color: white;
+    color: var(--white);
     font-size: 1.5rem;
     text-transform: capitalize;
     display:block;
@@ -42,6 +57,7 @@ nav {
 }
 
 .links {
+    margin-right: 10px;
     height: 0;
     overflow: hidden;
     transition: all 0.3s linear;
@@ -51,6 +67,123 @@ nav {
     height: 40rem;
 }
 
+/* 
+//////////////////////////////////
+///////// index page /////////////
+*/
+
+.index-secondS {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+.index-secondS article {
+    
+    width: 100%;
+    
+}
+.index-secondS p {
+    margin: 0 auto;
+    width: 50%;
+    
+}
+
+
+
+/* 
+///////////////////////////////////
+/// Login page ///////////////////
+/////////////////////////////////
+*/
+.login-form form {
+    width: 100%;
+    padding: 50px 30px;
+    background-image: linear-gradient(to bottom, #0ab4a6, #09705f);
+    max-width: 400px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+}
+
+.login-form form h1 {
+    color: var(--white);
+    font-size: 36px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.login-form form label {
+    display:block;
+    color: var(--white);
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.login-form form input {
+    appearance: none;
+    background: none;
+    outline:none;
+    border: none;
+}
+
+.login-form form input {
+    display:block;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 0px rgba(0,0,0,0);
+    transition: 0.4s;
+    color: #222;
+    font-size: 18px;
+    font-weight: 300;
+}
+.login-form form input::placeholder {
+    color: var(--white)  
+}
+
+.login-form form input:focus{
+    background-color: var(--white);
+    box-shadow: 0px 6px 12px rgba(0,0,0,0.2);
+}
+
+.login-form form button {
+    display: block;
+    border: none;
+    width: 100%;
+    padding: 15px;
+    margin-top: 30px;
+    border-radius: 8px;
+    background-color: #2F4960;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    transition: 0.4s;
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 700;
+}
 @media screen and (min-width:785px) {
+
+    .nav-toggle {
+        display:none;
+    }
+    .nav-center {
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .links {
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        
+    }
+    .links li{
+        list-style: none;
+        
+    }
+    .links li a {
+        text-decoration: none;
+    }
 
 }
