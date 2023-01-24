@@ -20,7 +20,7 @@ app.use(express.static('public')) // setup css file
 
 // require Users db
 const User = require('./models/user');
-const { eventNames } = require('./models/user');
+const { eventNames, rawListeners } = require('./models/user');
 
 
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true})
@@ -73,7 +73,11 @@ passport.use(new localStrategy(function(username, password, done) {
 
 // Function that check if user is logged in
 function isLoggedIn(req,res,next) {
-    if (req.isAuthenticated()) return next();
+    if (req.isAuthenticated()) {
+        
+        return next();
+    }
+   
     res.redirect('/home');
 }
 
@@ -84,25 +88,40 @@ function isLoggedOut(req,res,next) {
 }
 // go to index page
 app.get("/", (req,res) => {
+    
 
-    res.render('index', {title: "Home"});
+    // If user is not logged in we send data boolean inside logged so when can change our navbar
+    if(!req.user) {
+        res.render('index', {title: "Home2", logged : false})
+    } else {
+        res.render('index', {title: "Home", logged: true})
+    }
+    
 
 });
 
 // Home is for logged in users
-app.get('/home', (req,res) => {
+app.get('/home', isLoggedIn, (req,res) => {
 
-    res.render('home', {title: "MovieApp"})
+
+    if(!req.user) {
+        res.render('home', {title: "MovieApp", logged : false})
+    } else {
+        res.render('home', {title: "MoviaApp", logged: true})
+    }
+    
+    
 })
 
 
 
 app.get('/login', isLoggedOut, (req,res) => {
-    let response = {
-        title: "Login",
-        error: req.query.error
-    }
-    res.render('login', response)
+
+    // check if error is true or false
+    let error = req.query.error;
+    
+    
+    res.render('login', {title: "Login", error: error, logged: false} )
 })
 
 app.get('/setup', async (req,res) => {
@@ -131,10 +150,12 @@ app.get('/setup', async (req,res) => {
     })
 })
 
-// Login post 
+// Login post. when logging in this will redirect you home page
 app.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/home',
     failureRedirect : '/login?error=true'
+
+
 }))
 
 app.get('/logout', function(req,res) {
@@ -148,7 +169,7 @@ app.get('/logout', function(req,res) {
 })
 
 app.get('/register', (req,res) => {
-    res.render('register')
+    res.render('register', {title: "Register", logged: false})
 })
 
 
