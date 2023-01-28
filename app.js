@@ -124,17 +124,28 @@ app.post("/home", (req,res) => {
     const API_KEY = "api_key=a710a7022b9279d7b829c1371ed47e06"; // api key
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
     const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
+    const searchURL = BASE_URL + "/search/movie?" + API_KEY;
 
     function getMovies (url) {
         fetch(url)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                
+                showMovies(data.results)
                 
             })
     }
 
+    function showMovies(data) {
+        data.forEach(movie => {
+            const {title, poster_path, vote_average, overview} = movie;
+
+            console.log(title);
+        })
+    }
+    
     let search = req.body.search
+    getMovies(searchURL + '&query=' + search)
     console.log(search);
 })
 
