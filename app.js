@@ -4,6 +4,7 @@ const express = require('express');
 const bcrypt = require('bcrypt')
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
+// const {getMovies} = require("./movieFinder.js")
 const { default: mongoose } = require('mongoose');
 const session = require('express-session')
 const app = express();
@@ -112,10 +113,29 @@ app.get('/home', isLoggedIn, (req,res) => {
     if(!req.user) {
         res.render('home', {title: "MovieApp", logged : false})
     } else {
+        
         res.render('home', {title: "MoviaApp", logged: true, message: message})
     }
     
     
+})
+
+app.post("/home", (req,res) => {
+    const API_KEY = "api_key=a710a7022b9279d7b829c1371ed47e06"; // api key
+    const BASE_URL = "https://api.themoviedb.org/3"; // Api url
+    const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
+
+    function getMovies (url) {
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                
+            })
+    }
+
+    let search = req.body.search
+    console.log(search);
 })
 
 
