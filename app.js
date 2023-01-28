@@ -4,7 +4,7 @@ const express = require('express');
 const bcrypt = require('bcrypt')
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
-// const {getMovies} = require("./movieFinder.js")
+const {getMovies} = require("./movieFinder.js")
 const { default: mongoose } = require('mongoose');
 const session = require('express-session')
 const app = express();
@@ -102,54 +102,26 @@ app.get("/", (req,res) => {
 });
 
 // Home is for logged in users
-app.get('/home', (req,res) => {
+app.get('/home', isLoggedIn, (req,res) => {
     const API_KEY = "api_key=a710a7022b9279d7b829c1371ed47e06"; // api key
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
-    const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
-    const searchURL = BASE_URL + "/search/movie?" + API_KEY;
-    const IMG_URL = "https://image.tmdb.org/t/p/w500/"; // use this on home page when searching images
+    const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY; // this bring all the popular movies to page
 
-    function getMovies (url) {
 
-            fetch(url)
-                .then(res => res.json())
-                .then(data => {
-                    
-                    // showMovies(data.results)
-                    const results = data.results;
-                    let titles = []
-                    let posters = []
-                    results.forEach(movie => {
-                        const {title, poster_path, vote_average, overview} = movie;
-                        titles.push(title);
-                        posters.push(poster_path)
-                        console.log(poster_path)
-                        
-                    })
-                    
-                    res.render('home', {movieTitle: titles,poster: posters, title: "MoviaApp", logged: true, message: "message"})
-                })
-        }
+    // use these to display welcome text including user name
+    let user = req.user.username
+    let message = `Tervetuloa ${user}`
     
-
-    getMovies(API_URL)
-
-    
-
-    // // use these to display welcome text including user name
-    // let user = req.user.username
-    // let message = `Tervetuloa ${user}`
-    
-    // if(!req.user) {
-    //     res.render('home', {title: "MovieApp", logged : false})
-    // } else {
+    if(!req.user) {
+        res.render('login', {title: "Login", error: error, logged: false} )
+    } else {
 
 
         
-    //     res.render('home', {title: "MoviaApp", logged: true, message: message})
-    // }
+        getMovies(API_URL,res,message)
+    }
     
-//    
+   
     
 })
 
@@ -160,31 +132,14 @@ app.post("/home", (req,res) => {
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
     const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
     const searchURL = BASE_URL + "/search/movie?" + API_KEY;
-
-    function getMovies (url) {
-        fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                
-                showMovies(data.results)
-                
-            })
-    }
-
-    function showMovies(data) {
-        data.forEach(movie => {
-            const {title, poster_path, vote_average, overview} = movie;
-
-            
-            
-        })
-    }
-
+    const IMG_URL = "https://image.tmdb.org/t/p/w500/"; // use this on home page when searching images
+    let message = "etsinnän tulos on: ";
+    
     
     
     let search = req.body.search
-    getMovies(searchURL + '&query=' + search)
-    console.log(search);
+    getMovies(searchURL + '&query=' + search, res, message)
+    
 })
 
 
