@@ -107,9 +107,10 @@ app.get('/home', (req,res) => {
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
     const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
     const searchURL = BASE_URL + "/search/movie?" + API_KEY;
+    const IMG_URL = "https://image.tmdb.org/t/p/w500/"; // use this on home page when searching images
 
     function getMovies (url) {
-        
+
             fetch(url)
                 .then(res => res.json())
                 .then(data => {
@@ -117,13 +118,16 @@ app.get('/home', (req,res) => {
                     // showMovies(data.results)
                     const results = data.results;
                     let titles = []
+                    let posters = []
                     results.forEach(movie => {
                         const {title, poster_path, vote_average, overview} = movie;
                         titles.push(title);
+                        posters.push(poster_path)
+                        console.log(poster_path)
                         
                     })
                     
-                    res.render('home', {movieTitle: titles,title: "MoviaApp", logged: true, message: "message"})
+                    res.render('home', {movieTitle: titles,poster: posters, title: "MoviaApp", logged: true, message: "message"})
                 })
         }
     
@@ -145,22 +149,7 @@ app.get('/home', (req,res) => {
     //     res.render('home', {title: "MoviaApp", logged: true, message: message})
     // }
     
-//    function getMovies (url) {
-//             fetch(url)
-//                 .then(res => res.json())
-//                 .then(data => {
-                    
-//                     // showMovies(data.results)
-//                     const results = data.results;
-
-//                     results.forEach(movie => {
-//                         const {title, poster_path, vote_average, overview} = movie;
-                        
-//                         res.render('home', {title: "MoviaApp", logged: true, message: message})
-//                     })
-                    
-//                 })
-//         }
+//    
     
 })
 

@@ -21,7 +21,9 @@
 
         <% for (let i = 0; i < movieTitle.length; i++) { %>
             <div class="movie">
-                <img src="/medium-cover.jpg" alt="Image">
+                
+                
+                <img src="https://image.tmdb.org/t/p/w500/<%=poster[i]%>" alt="Image" > 
             
                 <div class="movie-info">
                     <h3><%= movieTitle[i] %></h3>
