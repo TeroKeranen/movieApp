@@ -102,25 +102,71 @@ app.get("/", (req,res) => {
 });
 
 // Home is for logged in users
-app.get('/home', isLoggedIn, (req,res) => {
+app.get('/home', (req,res) => {
+    const API_KEY = "api_key=a710a7022b9279d7b829c1371ed47e06"; // api key
+    const BASE_URL = "https://api.themoviedb.org/3"; // Api url
+    const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
+    const searchURL = BASE_URL + "/search/movie?" + API_KEY;
 
-    
-
-    // use these to display welcome text including user name
-    let user = req.user.username
-    let message = `Tervetuloa ${user}`
-    
-    if(!req.user) {
-        res.render('home', {title: "MovieApp", logged : false})
-    } else {
+    function getMovies (url) {
         
-        res.render('home', {title: "MoviaApp", logged: true, message: message})
-    }
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    
+                    // showMovies(data.results)
+                    const results = data.results;
+                    let titles = []
+                    results.forEach(movie => {
+                        const {title, poster_path, vote_average, overview} = movie;
+                        titles.push(title);
+                        
+                    })
+                    
+                    res.render('home', {movieTitle: titles,title: "MoviaApp", logged: true, message: "message"})
+                })
+        }
     
+
+    getMovies(API_URL)
+
+    
+
+    // // use these to display welcome text including user name
+    // let user = req.user.username
+    // let message = `Tervetuloa ${user}`
+    
+    // if(!req.user) {
+    //     res.render('home', {title: "MovieApp", logged : false})
+    // } else {
+
+
+        
+    //     res.render('home', {title: "MoviaApp", logged: true, message: message})
+    // }
+    
+//    function getMovies (url) {
+//             fetch(url)
+//                 .then(res => res.json())
+//                 .then(data => {
+                    
+//                     // showMovies(data.results)
+//                     const results = data.results;
+
+//                     results.forEach(movie => {
+//                         const {title, poster_path, vote_average, overview} = movie;
+                        
+//                         res.render('home', {title: "MoviaApp", logged: true, message: message})
+//                     })
+                    
+//                 })
+//         }
     
 })
 
 app.post("/home", (req,res) => {
+
+
     const API_KEY = "api_key=a710a7022b9279d7b829c1371ed47e06"; // api key
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
     const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
@@ -140,9 +186,12 @@ app.post("/home", (req,res) => {
         data.forEach(movie => {
             const {title, poster_path, vote_average, overview} = movie;
 
-            console.log(title);
+            
+            
         })
     }
+
+    
     
     let search = req.body.search
     getMovies(searchURL + '&query=' + search)
