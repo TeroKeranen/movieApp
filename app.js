@@ -103,9 +103,9 @@ app.get("/", (req,res) => {
 
 // Home is for logged in users
 app.get('/home', isLoggedIn, (req,res) => {
-    const API_KEY = process.env.API_KEY; // api key
+    const API_KEYs = process.env.API_KEY; // api key
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
-    const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY; // this bring all the popular movies to page
+    const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEYs; // this bring all the popular movies to page
 
 
     // use these to display welcome text including user name
@@ -156,6 +156,7 @@ app.get('/home', isLoggedIn, (req,res) => {
                     response.render('home', {color: getColor,movieTitle: titles, poster: posters, overview : overviews, vote: voteAvg, title: "MoviaApp", logged: true, message: msg})
                 })
                 .catch(error => {
+                    console.log(error);
                     response.render('home', {color: getColor,movieTitle: "titles", poster:" posters", overview : "overviews", vote: "voteAvg", title: "MoviaApp", logged: true, message: "msg"})
                 })  
         }
@@ -174,10 +175,10 @@ app.get('/home', isLoggedIn, (req,res) => {
 app.post("/home", (req,res) => {
 
 
-    const API_KEY = process.env.API_KEY; // api key
+    const API_KEYs = process.env.API_KEY; // api key
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
-    const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
-    const searchURL = BASE_URL + "/search/movie?" + API_KEY;
+    const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEYs;
+    const searchURL = BASE_URL + "/search/movie?" + API_KEYs;
     const IMG_URL = "https://image.tmdb.org/t/p/w500/"; // use this on home page when searching images
     
     let search = req.body.search
