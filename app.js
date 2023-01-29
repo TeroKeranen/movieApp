@@ -115,8 +115,8 @@ app.get('/home', isLoggedIn, (req,res) => {
     if(!req.user) {
         res.render('login', {title: "Login", error: error, logged: false} )
     } else {
-        
-        getMovies(API_URL,res,message)
+        res.render('home', {color: "getColor",movieTitle: "titles", poster: "posters", overview : "overviews", vote: "voteAvg", title: "MoviaApp", logged: true, message: "msg"})
+        // getMovies(API_URL,res,message)
     }
     
    
