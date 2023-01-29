@@ -203,8 +203,8 @@ app.get('/register', (req,res) => {
 
 
 
-const PORT = process.env.PORT || 5000
+const port = process.env.PORT || 5000
 
-app.listen(PORT, function () {
+app.listen(port, function () {
     console.log(`server started on port ${PORT}`);
 })
