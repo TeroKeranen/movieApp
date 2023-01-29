@@ -155,6 +155,9 @@ app.get('/home', isLoggedIn, (req,res) => {
                     
                     response.render('home', {color: getColor,movieTitle: titles, poster: posters, overview : overviews, vote: voteAvg, title: "MoviaApp", logged: true, message: msg})
                 })
+                .catch(error => {
+                    response.render('home', {color: getColor,movieTitle: "titles", poster:" posters", overview : "overviews", vote: "voteAvg", title: "MoviaApp", logged: true, message: "msg"})
+                })  
         }
 
 
