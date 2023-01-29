@@ -1,6 +1,6 @@
 // require express
 const express = require('express');
-
+const dotenv = require("dotenv").config();
 const bcrypt = require('bcrypt')
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
@@ -8,7 +8,7 @@ const {getMovies} = require("./movieFinder.js")
 const { default: mongoose } = require('mongoose');
 const session = require('express-session')
 const app = express();
-const MONGODB_URI = process.env.MONGODB_URI;
+const Mongodb = process.env.MONGODB_URI;
 
 // set up ejs
 app.set('view engine', 'ejs');
@@ -24,7 +24,7 @@ const User = require('./models/user');
 const { eventNames, rawListeners } = require('./models/user');
 
 
-mongoose.connect(MONGODB_URI, {useNewUrlParser: true})
+mongoose.connect(Mongodb, {useNewUrlParser: true})
     .then((result) => console.log("Connected to db"))
     .catch((err) => console.log(err))
 
