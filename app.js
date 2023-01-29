@@ -115,7 +115,8 @@ app.get('/home', isLoggedIn, (req,res) => {
     if(!req.user) {
         res.render('login', {title: "Login", error: error, logged: false} )
     } else {
-        function getMovies (url,response, msg) {
+
+        function getMovies (url, msg) {
 
             // this function return class color on page
             function getColor(vote) {
@@ -130,9 +131,10 @@ app.get('/home', isLoggedIn, (req,res) => {
 
             fetch(url)
                 .then(res => res.json())
-                .then(data => {
-                    
-                    // showMovies(data.results)
+
+                .then ((data) => {
+
+                     // showMovies(data.results)
                     const results = data.results;
                     // create arrays where to push movie datas
                     let titles = []
@@ -153,11 +155,12 @@ app.get('/home', isLoggedIn, (req,res) => {
                         
                     })
                     
-                    response.render('home', {color: getColor,movieTitle: titles, poster: posters, overview : overviews, vote: voteAvg, title: "MoviaApp", logged: true, message: msg})
+                    res.render('home', {color: getColor,movieTitle: titles, poster: posters, overview : overviews, vote: voteAvg, title: "MoviaApp", logged: true, message: msg})
+
                 })
                 .catch(error => {
                     console.log(error);
-                    response.render('home', {color: getColor,movieTitle: "titles", poster:" posters", overview : "overviews", vote: "voteAvg", title: "MoviaApp", logged: true, message: error})
+                    res.render('home', {color: getColor,movieTitle: "titles", poster:" posters", overview : "overviews", vote: "voteAvg", title: "MoviaApp", logged: true, message: error})
                 })  
         }
 
@@ -165,7 +168,7 @@ app.get('/home', isLoggedIn, (req,res) => {
 
 
         
-        getMovies(API_URL,res,message)
+        getMovies(API_URL,message)
     }
     
    
