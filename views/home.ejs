@@ -9,13 +9,17 @@
     <!-- include navbar -->
     <%- include('./partials/nav.ejs') %>
 
-    <h1><%= message %></h1>
+    <div class="welcome-container">
+        <h1><%= message %></h1>
 
-    <header>
+        <div class="search-form">
         <form id="form" action="/home" method="POST">
-            <input type="text" placeholder="Search" id="search" class="search" name="search">
+            <input type="text" placeholder="Search movie" id="search" class="search" name="search">
+            <button type="submit">Search</button>
         </form>
-    </header>
+        </div>
+        
+    </div>
 
     <main id="main">
 
@@ -27,7 +31,7 @@
             
                 <div class="movie-info">
                     <h3><%= movieTitle[i] %></h3>
-                    <span class="green"><%= vote[i] %></span>
+                    <span class="<%= color(vote[i]) %>"><%= vote[i] %></span>
                 </div>
                 
                 <div class="overview">

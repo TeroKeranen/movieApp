@@ -8,7 +8,7 @@ const {getMovies} = require("./movieFinder.js")
 const { default: mongoose } = require('mongoose');
 const session = require('express-session')
 const app = express();
-const MONGODB_URI = "mongodb+srv://netninja:tero123@cluster0.xecqchu.mongodb.net/MovieApp?retryWrites=true&w=majority"
+const MONGODB_URI = process.env.MONGODB_URI;
 
 // set up ejs
 app.set('view engine', 'ejs');
@@ -103,7 +103,7 @@ app.get("/", (req,res) => {
 
 // Home is for logged in users
 app.get('/home', isLoggedIn, (req,res) => {
-    const API_KEY = "api_key=a710a7022b9279d7b829c1371ed47e06"; // api key
+    const API_KEY = process.env.API_KEY; // api key
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
     const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY; // this bring all the popular movies to page
 
@@ -115,8 +115,6 @@ app.get('/home', isLoggedIn, (req,res) => {
     if(!req.user) {
         res.render('login', {title: "Login", error: error, logged: false} )
     } else {
-
-
         
         getMovies(API_URL,res,message)
     }
@@ -128,16 +126,18 @@ app.get('/home', isLoggedIn, (req,res) => {
 app.post("/home", (req,res) => {
 
 
-    const API_KEY = "api_key=a710a7022b9279d7b829c1371ed47e06"; // api key
+    const API_KEY = process.env.API_KEY; // api key
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
     const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
     const searchURL = BASE_URL + "/search/movie?" + API_KEY;
     const IMG_URL = "https://image.tmdb.org/t/p/w500/"; // use this on home page when searching images
-    let message = "etsinnän tulos on: ";
-    
-    
     
     let search = req.body.search
+    let message = `etsit hakusanalla ${search}`;
+    
+    
+    
+    
     getMovies(searchURL + '&query=' + search, res, message)
     
 })
@@ -203,8 +203,8 @@ app.get('/register', (req,res) => {
 
 
 
+const PORT = process.env.PORT || 3000
 
-
-app.listen(3000, function () {
-    console.log("Server started on port 3000");
+app.listen(PORT, function () {
+    console.log(`server started on port ${PORT}`);
 })
