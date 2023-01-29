@@ -4,7 +4,7 @@ const dotenv = require("dotenv").config();
 const bcrypt = require('bcrypt')
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
-const {getMovies} = require("./movieFinder.js")
+// const {getMovies} = require("./movieFinder.js")
 const { default: mongoose } = require('mongoose');
 const session = require('express-session')
 const app = express();
@@ -115,8 +115,53 @@ app.get('/home', isLoggedIn, (req,res) => {
     if(!req.user) {
         res.render('login', {title: "Login", error: error, logged: false} )
     } else {
-        res.render('home', {color: "getColor",movieTitle: "titles", poster: "posters", overview : "overviews", vote: "voteAvg", title: "MoviaApp", logged: true, message: "msg"})
-        // getMovies(API_URL,res,message)
+        function getMovies (url,response, msg) {
+
+            // this function return class color on page
+            function getColor(vote) {
+                if(vote >= 8) {
+                    return 'green'
+                } else if (vote >= 5) {
+                    return 'orange'
+                } else {
+                    return 'red'
+                }
+            }
+
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    
+                    // showMovies(data.results)
+                    const results = data.results;
+                    // create arrays where to push movie datas
+                    let titles = []
+                    let posters = []
+                    let overviews = []
+                    let voteAvg = []
+
+                    // iterate trought data results
+                    results.forEach(movie => {
+                        const {title, poster_path, vote_average, overview} = movie;
+
+                        // push values to theyr arrays
+                        titles.push(title);
+                        posters.push(poster_path)
+                        overviews.push(overview)
+                        voteAvg.push(vote_average)
+                        
+                        
+                    })
+                    
+                    response.render('home', {color: getColor,movieTitle: titles, poster: posters, overview : overviews, vote: voteAvg, title: "MoviaApp", logged: true, message: msg})
+                })
+        }
+
+
+
+
+        
+        getMovies(API_URL,res,message)
     }
     
    
