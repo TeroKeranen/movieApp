@@ -143,7 +143,7 @@ app.get('/home', isLoggedIn, (req,res) => {
                     let voteAvg = []
 
                     // iterate trought data results
-                    results.forEach(movie => {
+                    data.results.forEach(movie => {
                         const {title, poster_path, vote_average, overview} = movie;
 
                         // push values to theyr arrays
@@ -158,10 +158,7 @@ app.get('/home', isLoggedIn, (req,res) => {
                     res.render('home', {color: getColor,movieTitle: titles, poster: posters, overview : overviews, vote: voteAvg, title: "MoviaApp", logged: true, message: "msg"})
 
                 })
-                .catch(error => {
-                    console.log(error);
-                    res.render('home', {color: getColor,movieTitle: "titles", poster:" posters", overview : "overviews", vote: "voteAvg", title: "MoviaApp", logged: true, message: error})
-                })  
+                 
         }
 
 
