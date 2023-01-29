@@ -116,7 +116,7 @@ app.get('/home', isLoggedIn, (req,res) => {
         res.render('login', {title: "Login", error: error, logged: false} )
     } else {
 
-        function getMovies (url, msg) {
+        function getMovies (url) {
 
             // this function return class color on page
             function getColor(vote) {
@@ -155,7 +155,7 @@ app.get('/home', isLoggedIn, (req,res) => {
                         
                     })
                     
-                    res.render('home', {color: getColor,movieTitle: titles, poster: posters, overview : overviews, vote: voteAvg, title: "MoviaApp", logged: true, message: msg})
+                    res.render('home', {color: getColor,movieTitle: titles, poster: posters, overview : overviews, vote: voteAvg, title: "MoviaApp", logged: true, message: "msg"})
 
                 })
                 .catch(error => {
@@ -168,7 +168,7 @@ app.get('/home', isLoggedIn, (req,res) => {
 
 
         
-        getMovies(API_URL,message)
+        getMovies(API_URL)
     }
     
    
