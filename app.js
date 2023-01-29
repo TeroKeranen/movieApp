@@ -142,21 +142,28 @@ app.get('/home', isLoggedIn, (req,res) => {
                     let overviews = []
                     let voteAvg = []
 
-                    // iterate trought data results
-                    data.results.forEach(movie => {
-                        const {title, poster_path, vote_average, overview} = movie;
+                    if (data) {
 
-                        // push values to theyr arrays
-                        titles.push(title);
-                        posters.push(poster_path)
-                        overviews.push(overview)
-                        voteAvg.push(vote_average)
+                            // iterate trought data results
+                        data.results.forEach(movie => {
+                            const {title, poster_path, vote_average, overview} = movie;
+
+                            // push values to theyr arrays
+                            titles.push(title);
+                            posters.push(poster_path)
+                            overviews.push(overview)
+                            voteAvg.push(vote_average)
+                            
+                            
+                        })
                         
-                        
-                    })
+                        res.render('home', {color: getColor,movieTitle: titles, poster: posters, overview : overviews, vote: voteAvg, title: "MoviaApp", logged: true, message: "msg"})
+                    }
                     
-                    res.render('home', {color: getColor,movieTitle: titles, poster: posters, overview : overviews, vote: voteAvg, title: "MoviaApp", logged: true, message: "msg"})
 
+                })
+                .catch((error) => {
+                    console.log(error);
                 })
                  
         }
