@@ -163,7 +163,7 @@ app.get('/home', isLoggedIn, (req,res) => {
 
                 })
                 .catch((error) => {
-                    console.log(error);
+                     res.render('home', {color: getColor,movieTitle:" titles", poster:" posters", overview : "overviews", vote: "voteAvg", title: "MoviaApp", logged: true, message: error})
                 })
                  
         }
