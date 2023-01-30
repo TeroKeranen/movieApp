@@ -129,7 +129,7 @@ app.get('/home', isLoggedIn, (req,res) => {
                 }
             }
 
-            fetch(API_URL)
+            fetch("https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=a710a7022b9279d7b829c1371ed47e06")
                 .then(res => res.json())
 
                 .then ((data) => {
