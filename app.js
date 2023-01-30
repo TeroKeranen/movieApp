@@ -116,7 +116,7 @@ app.get('/home', isLoggedIn, (req,res) => {
         res.render('login', {title: "Login", error: error, logged: false} )
     } else {
 
-        function getMovies (url) {
+        function getMovies () {
 
             // this function return class color on page
             function getColor(vote) {
@@ -129,7 +129,7 @@ app.get('/home', isLoggedIn, (req,res) => {
                 }
             }
 
-            fetch(url)
+            fetch(API_URL)
                 .then(res => res.json())
 
                 .then ((data) => {
@@ -172,7 +172,7 @@ app.get('/home', isLoggedIn, (req,res) => {
 
 
         
-        getMovies(API_URL)
+        getMovies()
     }
     
    
