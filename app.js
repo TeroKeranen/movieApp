@@ -103,7 +103,7 @@ app.get("/", (req,res) => {
 
 // Home is for logged in users
 app.get('/home', isLoggedIn, (req,res) => {
-    const API_KEYs = process.env.API_KEYs; // api key
+    const API_KEYs = process.env.API_KEY; // api key
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
     const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEYs; // this bring all the popular movies to page
     console.log(API_URL)
