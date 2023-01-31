@@ -194,17 +194,44 @@ app.post('/fav', (req,res) => {
     let favVote = req.body.movieVote;
     let favOverview = req.body.movieOverview;
     let id = req.user.id
-    
+    const favorites = [];
+    const currentFavorite = req.user.favoriteMovies;
+
     
 
-    User.updateOne({_id:id}, {$push: {favoriteMovies: {title: favTitle, poster:favPoster, vote:favVote,overview:favOverview}}}, (err) => {
-        if(err) {
-            console.log(err);
-        } else {
-            res.redirect('/home');
-        }
-    })
     
+    // If try add movie in favorites page and that movie is there already it wont add it. Otherwise it will add movie in there
+    User.findOne({username: req.user.username}, (error, foundUser)=>{
+        if (error) {
+            console.log(error);
+        } else {
+            const isInfavoriteMovies = foundUser.favoriteMovies.some(movie => movie.title === favTitle)
+
+            if (isInfavoriteMovies) {
+                console.log(`${favTitle} is already in favorite movies`)
+            } else {
+                foundUser.favoriteMovies.push({
+                    title: favTitle,
+                    poster: favPoster,
+                    vote: favVote,
+                    overview: favOverview,
+                })
+
+                foundUser.save((error) => {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log("added to favmovies")
+                    }
+                })
+            }
+        }
+        res.redirect('/home')
+    })
+
+    
+
+   
     
     
 })
