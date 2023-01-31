@@ -277,6 +277,13 @@ section {
     /////////////////////////////
 
     */
+.fav-button {
+    position: absolute;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 
 .search-form form {
     margin: 0 auto;

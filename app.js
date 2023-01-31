@@ -7,6 +7,7 @@ const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const {getMovies} = require("./movieFinder.js")
 const {getDate} = require('./getdate')
+const {getColor} = require('./getColor')
 const mongoose = require('mongoose');
 const session = require('express-session')
 const app = express();
@@ -185,6 +186,49 @@ app.get('/setup', async (req,res) => {
             res.redirect('/login');
         })
     })
+})
+
+app.post('/fav', (req,res) => {
+    let favTitle = req.body.movieTitle;
+    let favPoster = req.body.moviePoster;
+    let favVote = req.body.movieVote;
+    let favOverview = req.body.movieOverview;
+    let id = req.user.id
+    
+    
+
+    User.updateOne({_id:id}, {$push: {favoriteMovies: {title: favTitle, poster:favPoster, vote:favVote,overview:favOverview}}}, (err) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.redirect('/home');
+        }
+    })
+    
+    
+    
+})
+
+app.get('/favorites', (req,res) => {
+
+    let id = req.user.id;
+    
+    let movies = req.user.favoriteMovies;
+    let titles = []
+    let posters = []
+    let votes = []
+    let overviews = []
+    movies.forEach((movie) => {
+        const {title, poster,vote,overview} = movie;
+        titles.push(title);
+        posters.push(poster);
+        votes.push(vote);
+        overviews.push(overview);
+        
+    })
+    
+    res.render('favorites', {title:"My movies", logged: true, favMovies: movies, movieTitle:titles,vote:votes, overview:overviews, poster:posters, color:getColor  })
+
 })
 
 // Login post. when logging in this will redirect you home page

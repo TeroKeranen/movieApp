@@ -24,20 +24,30 @@
     <main id="main">
 
         <% for (let i = 0; i < movieTitle.length; i++) { %>
-            <div class="movie">
-                
-                
-                <img src="https://image.tmdb.org/t/p/w500/<%=poster[i]%>" alt="Image" > 
-            
-                <div class="movie-info">
-                    <h3><%= movieTitle[i] %></h3>
-                    <span class="<%=color(vote[i])%>"><%= vote[i] %></span>
+
+            <form action="/fav" method="post">
+                <div class="movie">
+                    
+                    
+                    <div class="fav-button">
+                        <input type="hidden" name="movieTitle" value="<%= movieTitle[i] %>">
+                        <input type="hidden" name="moviePoster" value="<%= poster[i] %>">
+                        <input type="hidden" name="movieVote" value="<%= vote[i] %>">
+                        <input type="hidden" name="movieOverview" value="<%= overview[i] %>">
+                        <button type="submit" name="movie">add</button>
+                    </div>
+                    <img src="https://image.tmdb.org/t/p/w500/<%=poster[i]%>" alt="Image" > 
+                    
+                    <div class="movie-info">
+                        <h3><%= movieTitle[i] %></h3>
+                        <span class="<%=color(vote[i])%>"><%= vote[i] %></span>
+                    </div>
+                    
+                    <div class="overview">
+                        <%=overview[i] %>
+                    </div>
                 </div>
-                
-                <div class="overview">
-                    <%=overview[i] %>
-                </div>
-            </div>
+            </form>
             
         <% } %>
 

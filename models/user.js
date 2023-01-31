@@ -7,7 +7,16 @@ const UserSchema = new Schema({
     username: String,
     password : String,
     email : String,
-    registeredDate: String
+    registeredDate: String,
+
+    favoriteMovies : [
+        {
+            title: String,
+            poster : String,
+            vote: Number,
+            overview: String
+        }
+    ]
 })
 UserSchema.plugin(passportLocalMongoose);
 const User = mongoose.model('User', UserSchema);
