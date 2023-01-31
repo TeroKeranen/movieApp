@@ -1,5 +1,7 @@
 function getMovies (url,response, msg) {
 
+            const popularMovies = url;
+
             // this function return class color on page
             function getColor(vote) {
                 if(vote >= 8) {
@@ -11,7 +13,7 @@ function getMovies (url,response, msg) {
                 }
             }
 
-            fetch(url)
+            fetch(popularMovies)
                 .then(res => res.json())
                 .then(data => {
                     
@@ -37,6 +39,9 @@ function getMovies (url,response, msg) {
                     })
                     
                     response.render('home', {color: getColor,movieTitle: titles, poster: posters, overview : overviews, vote: voteAvg, title: "MoviaApp", logged: true, message: msg})
+                })
+                .catch((error) => {
+                     res.render('home', {color: getColor,movieTitle:" titles", poster:" posters", overview : "overviews", vote: "voteAvg", title: "MoviaApp", logged: true, message: error})
                 })
         }
 
