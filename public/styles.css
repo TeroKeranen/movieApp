@@ -94,12 +94,21 @@ section {
 
 
 /* 
-///////////////////////////////////
-/// Login page ///////////////////
-/////////////////////////////////
+/////////////////////////////////////////////////////
+/// Login page and register page ///////////////////
+////////////////////////////////////////////////
 */
-
-
+.error-hide {
+    display: none;
+}
+.error-message {
+    background: black;
+    padding: 1rem;
+    color: red;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
 .login-form form, .register-form form {
     margin: 0 auto;
     width: 100%;

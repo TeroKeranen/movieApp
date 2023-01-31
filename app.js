@@ -3,9 +3,11 @@ const express = require('express');
 const dotenv = require("dotenv").config();
 const bcrypt = require('bcrypt')
 const passport = require('passport');
+
 const localStrategy = require('passport-local').Strategy;
 const {getMovies} = require("./movieFinder.js")
-const { default: mongoose } = require('mongoose');
+const {getDate} = require('./getdate')
+const mongoose = require('mongoose');
 const session = require('express-session')
 const app = express();
 const Mongodb = process.env.MONGODB_URI;
@@ -116,12 +118,6 @@ app.get('/home', isLoggedIn, (req,res) => {
     if(!req.user) {
         res.render('login', {title: "Login", error: error, logged: false} )
     } else {
-
-        
-
-        
-
-
         
         getMovies(API_URL,res,message)
     }
@@ -135,14 +131,11 @@ app.post("/home", (req,res) => {
 
     const API_KEYs = process.env.API_KEY; // api key
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
-    const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEYs;
     const searchURL = BASE_URL + "/search/movie?" + API_KEYs;
     const IMG_URL = "https://image.tmdb.org/t/p/w500/"; // use this on home page when searching images
     
     let search = req.body.search
     let message = `etsit hakusanalla ${search}`;
-    
-    
     
     
     getMovies(searchURL + '&query=' + search, res, message)
@@ -205,7 +198,79 @@ app.get('/logout', function(req,res) {
 })
 
 app.get('/register', (req,res) => {
-    res.render('register', {title: "Register", logged: false})
+    res.render('register', {title: "Register", logged: false, error: ""})
+})
+
+app.post('/register', async (req,res) => {
+    const userName = req.body.name;
+    const userEmail = req.body.email;
+    const userPass = req.body.password;
+    let errorMessage = ""
+    const nameExists = await User.exists({username: userName});
+    const emailExists = await User.exists({email: userEmail})
+    if(nameExists && emailExists) {
+        errorMessage = "Käyttäjänimi ja sähköpostiosoite on jo käytössä"
+        res.render('register', {title:"Register",error: errorMessage, logged: false })
+        return;
+    } else if (emailExists) {
+        errorMessage = "Sähköpostiosoite on jo käytössä";
+        res.render('register', {title:"Register",error: errorMessage, logged: false })
+        return;
+
+    } else if (nameExists) {
+        errorMessage = "Käyttäjänimi on jo käytössä"
+        res.render('register', {title:"Register",error: errorMessage, logged: false })
+        return;
+
+    } else {
+        bcrypt.genSalt(10, function(err,salt) {
+        if (err) return next(err);
+        
+        bcrypt.hash(userPass, salt, function(err, hash) {
+            if (err) return next(err);
+            
+            const newUser = new User ( {
+                username: userName,
+                password: hash,
+                email: userEmail,
+                registeredDate: getDate(),
+
+            })
+
+            newUser.save();
+
+            res.redirect('/login');
+        })
+    })
+    }
+
+    
+
+    // User.findOne({username: userName}, function(err,foundUser) {
+
+    //     if (!foundUser) {
+            
+    //         User.findOne({email: userEmail}, function(err, foundEmail) {
+
+    //             if (!foundEmail) {
+
+    //                 User.register({username: userName, email: userEmail, registeredDate: getDate()}, req.body.password, function(err, user) {
+    //                     if (err) {
+    //                         res.redirect('/register')
+    //                     } else {
+    //                         passport.authenticate('local')(req,res,function() {
+    //                             res.redirect('/');
+    //                         })
+    //                     }
+    //                 })
+
+    //             } else {
+    //                 res.render('register', {error: "Jotai meni pieleen", title: "Register", logged: true } )
+    //             }
+    //         })
+    //     }
+
+    // })
 })
 
 
