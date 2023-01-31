@@ -106,7 +106,7 @@ app.get('/home', isLoggedIn, (req,res) => {
     const API_KEYs = process.env.API_KEY; // api key
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
     const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEYs; // this bring all the popular movies to page
-    const testi = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&" + API_KEYs 
+    const testi = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=a710a7022b9279d7b829c1371ed47e06" 
 
 
     // use these to display welcome text including user name
