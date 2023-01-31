@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+<body>
+
+
+
+    <!--  inlude navbar -->
+    <%- include('./partials/nav.ejs') %>
+
+
+    
+
+        <div class="user-info-container">
+
+            <div class="info-container">
+                <h1>Omat tiedot</h1>
+
+                <div class="user-infos">
+                    <h2>Käyttäjänimesi: <%= userName %></h2>
+                    <h2>Sähköpostiosoitteesi : <%= userEmail %></h2>
+                    <h2>Rekisteröitynyt: <%= userRegisterDate %></h2>
+                </div>
+            </div>
+
+        </div>
+
+    
+    
+</body>
+</html>

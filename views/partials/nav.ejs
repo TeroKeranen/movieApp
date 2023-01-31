@@ -18,7 +18,23 @@
                 <li><a href="/register">Register</a></li>
             <% } else { %>
                 <li><a href="/home">Home</a></li>
-                <li><a href="/logout">Logout</a></li>
+                
+
+                <div>
+                    <div class="user-information">
+                        <div class="userbutton">
+                            <button class="userbtn"><i class="fa-solid fa-user"></i></button>
+                        </div>
+                        <div class="information hide">
+                            <ul>
+                
+                                <li><a href="/omatTiedot">Omat tiedot</a></li>
+                
+                                <li><a href="/logout">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             <%}%>
             
         </ul>
@@ -34,5 +50,15 @@
     navToggle.addEventListener('click', function () {
         links.classList.toggle('show-links');
     })
+
+    // user information
+        const userBtn = document.querySelector('.userbtn')
+        const userInfo = document.querySelector('.information')
+        userBtn.addEventListener('click', function () {
+
+            userInfo.classList.toggle('hide');
+            userInfo.classList.toggle('test');
+
+        })
 
 </script>

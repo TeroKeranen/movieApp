@@ -90,7 +90,34 @@ section {
     width: 50%;
     
 }
+/* 
+/////////////////////////////////////////////////////
+/// omatTiedot page ///////////////////
+////////////////////////////////////////////////
+*/
+.user-info-container {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    color: white;
+}
+.info-container {
+    padding: 50px 30px;
+    background-image: linear-gradient(to bottom, #0ab48f, #09705f);
+    
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    text-align: center;
+    width: 80%;
+}
 
+.user-infos h2{
+    padding: 1rem;
+    
+    
+}
 
 
 /* 
@@ -182,6 +209,65 @@ section {
     font-size: 20px;
     font-weight: 700;
     cursor:pointer;
+}
+
+/* 
+            /////////////////////////////////////
+            /////// Registered user icon! //////
+            ///////////////////////////////////
+        */
+.user-information {
+
+    position: relative;
+    display: inline-block;
+
+
+}
+
+.user-information button {
+
+    background: transparent;
+    font-size: 1.6rem;
+    border: transparent;
+    cursor: pointer;
+    margin: 0 0 10px 20px;
+}
+
+.hide {
+    opacity: 0;
+
+
+}
+
+.fa-solid {
+    color: white;
+}
+.information {
+    background-color: var(--nav-background);
+    min-width: 200px;
+    position: absolute;
+    transition: all 0.4s ease;
+    z-index: 1;
+    height: 0;
+    transition: all 0.3s linear;
+
+}
+
+.test {
+    height: 300px;
+}
+
+
+
+.information ul li {
+    padding: 12px 16px;
+    display: block;
+
+}
+
+.information ul li a {
+    font-size: 1rem;
+    padding: 0rem;
 }
 
 
@@ -313,7 +399,9 @@ section {
         display:none;
     }
     .nav-center {
+        max-width: 1170px;
         display:flex;
+        margin: 0 auto;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
@@ -323,6 +411,10 @@ section {
         display: flex;
         flex-direction: row;
         
+        
+    }
+    .ul-links {
+        display:flex;
     }
     .links li{
         list-style: none;
@@ -331,6 +423,75 @@ section {
     .links li a {
         text-decoration: none;
     }
+
+                /* 
+            /////////////////////////////////////
+            /////// Registered user icon! //////
+            ///////////////////////////////////
+            */
+                .user-information {
+        
+                    position: absolute;
+                    display: inline-block;
+                    
+                    
+        
+                }
+        
+                .user-information button {
+        
+                    background: transparent;
+                    font-size: 1.6rem;
+                    border: transparent;
+                    cursor: pointer;
+        
+                    padding: 0.6rem;
+        
+        
+                }
+        
+        
+                .hide {
+                    display: none;
+        
+        
+                }
+        
+        
+                .information {
+                    background: var(--nav-background);
+                    min-width: 200px;
+                    position: absolute;
+                    transition: all 0.4s ease;
+                    height: 0;
+                    transition: all 0.3s linear;
+                    
+        
+                }
+        
+                .information ul li a {
+                    font-size: 1rem;
+                    padding: 0rem;
+                    
+                }
+        
+                .test {
+                    height: 300px;
+        
+                }
+        
+                .information ul {
+        
+                    margin-top: 30px;
+        
+                }
+        
+                .information ul li {
+                    padding: 12px 16px;
+                    display: block;
+                    
+        
+                }
 
     
     

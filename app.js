@@ -153,6 +153,14 @@ app.get('/login', isLoggedOut, (req,res) => {
     res.render('login', {title: "Login", error: error, logged: false} )
 })
 
+app.get('/omatTiedot', (req,res) => {
+    let user = req.user.username;
+    let email = req.user.email;
+    let registered = req.user.registeredDate;
+    
+    res.render('omatTiedot', {title: "Omat tiedot", logged: true, userName: user, userEmail: email, userRegisterDate: registered })
+})
+
 app.get('/setup', async (req,res) => {
     const exists = await User.exists({username: "admin"});
 
