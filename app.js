@@ -116,7 +116,9 @@ app.get('/home', isLoggedIn, (req,res) => {
         res.render('login', {title: "Login", error: error, logged: false} )
     } else {
 
-        function getMovies () {
+        function getMovies (url) {
+
+            const popularMovies = url;
 
             // this function return class color on page
             function getColor(vote) {
@@ -129,7 +131,7 @@ app.get('/home', isLoggedIn, (req,res) => {
                 }
             }
 
-            fetch("https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=a710a7022b9279d7b829c1371ed47e06")
+            fetch(popularMovies)
                 .then(res => res.json())
 
                 .then ((data) => {
@@ -172,7 +174,7 @@ app.get('/home', isLoggedIn, (req,res) => {
 
 
         
-        getMovies()
+        getMovies(API_URL)
     }
     
    
