@@ -7,35 +7,43 @@
 
     <%- include('./partials/nav.ejs') %>
 
-    <h1>HEEELOO</h1>
+    
 
     <main id="main">
-    
-        <% for (let i=0; i < favMovies.length; i++) { %>
-    
-           
-                <div class="movie">
-    
-    
-                    
-                    <img src="https://image.tmdb.org/t/p/w500/<%=poster[i]%>" alt="Image">
-    
-                    <div class="movie-info">
-                        <h3>
-                            <%= movieTitle[i] %>
-                        </h3>
-                        <span class="<%=color(vote[i])%>">
-                            <%= vote[i] %>
-                        </span>
-                    </div>
-    
-                    <div class="overview">
-                        <%=overview[i] %>
-                    </div>
-                </div>
+        <div class="user-fav-container">
+
+            <div class="welcome-container">
+                <h1>Your favorite movies</h1>
+            </div>
             
-    
-            <% } %>
+            <div class="movies">
+                <% for (let i=0; i < favMovies.length; i++) { %>
+            
+                
+                        <div class="movie">
+            
+            
+                            
+                            <img src="https://image.tmdb.org/t/p/w500/<%=poster[i]%>" alt="Image">
+            
+                            <div class="movie-info">
+                                <h3>
+                                    <%= movieTitle[i] %>
+                                </h3>
+                                <span class="<%=color(vote[i])%>">
+                                    <%= vote[i] %>
+                                </span>
+                            </div>
+            
+                            <div class="overview">
+                                <%=overview[i] %>
+                            </div>
+                        </div>
+                    
+            
+                    <% } %>
+            </div>
+        </div>
     
     
     </main>

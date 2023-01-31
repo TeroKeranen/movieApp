@@ -90,6 +90,32 @@ section {
     width: 50%;
     
 }
+
+
+/* 
+/////////////////////////////////////////////////////
+/// favorite page ///////////////////
+////////////////////////////////////////////////
+*/
+.user-fav-container {
+    width: 100%;
+    
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.movies {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(3, 1fr);
+    
+    
+}
+
 /* 
 /////////////////////////////////////////////////////
 /// omatTiedot page ///////////////////
@@ -499,8 +525,13 @@ section {
                     
         
                 }
+/* 
+/////////////////////////////////////////////////////
+/// favorite page ///////////////////
+////////////////////////////////////////////////
+*/
 
-    
+ 
     
 
 }

@@ -189,13 +189,14 @@ app.get('/setup', async (req,res) => {
 })
 
 app.post('/fav', (req,res) => {
+
+    // get movie infos
     let favTitle = req.body.movieTitle;
     let favPoster = req.body.moviePoster;
     let favVote = req.body.movieVote;
     let favOverview = req.body.movieOverview;
-    let id = req.user.id
-    const favorites = [];
-    const currentFavorite = req.user.favoriteMovies;
+    
+    
 
     
 
@@ -204,6 +205,7 @@ app.post('/fav', (req,res) => {
     User.findOne({username: req.user.username}, (error, foundUser)=>{
         if (error) {
             console.log(error);
+            
         } else {
             const isInfavoriteMovies = foundUser.favoriteMovies.some(movie => movie.title === favTitle)
 
