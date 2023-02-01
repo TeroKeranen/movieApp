@@ -283,6 +283,7 @@ app.get('/register', (req,res) => {
 })
 
 app.post('/register', async (req,res) => {
+
     const userName = req.body.name;
     const userEmail = req.body.email;
     const userPass = req.body.password;
@@ -327,34 +328,49 @@ app.post('/register', async (req,res) => {
 
     
 
-    // User.findOne({username: userName}, function(err,foundUser) {
-
-    //     if (!foundUser) {
-            
-    //         User.findOne({email: userEmail}, function(err, foundEmail) {
-
-    //             if (!foundEmail) {
-
-    //                 User.register({username: userName, email: userEmail, registeredDate: getDate()}, req.body.password, function(err, user) {
-    //                     if (err) {
-    //                         res.redirect('/register')
-    //                     } else {
-    //                         passport.authenticate('local')(req,res,function() {
-    //                             res.redirect('/');
-    //                         })
-    //                     }
-    //                 })
-
-    //             } else {
-    //                 res.render('register', {error: "Jotai meni pieleen", title: "Register", logged: true } )
-    //             }
-    //         })
-    //     }
-
-    // })
 })
 
+app.get('/changepassword', (req,res) => {
 
+    res.render('changepassword', {title: "Vaihda salasana", error: "", logged:true})
+})
+
+app.post('/changepassword', async (req,res) => {
+    
+
+    const user = req.user;
+
+    const oldPassword = req.body.oldpass;
+    const newPassword = req.body.newpass;
+
+    // Verify old password
+    const match = await bcrypt.compare(oldPassword, user.password);
+    if (!match) {
+        res.render('changepassword', {title: "Vaihda salasana", error: "Vanha salasana oli väärä", logged:true})
+    } else {
+         // Hash the new password
+            const hash = await bcrypt.hash(newPassword, 10);
+
+            // Update user password in the database
+            user.password = hash;
+            await user.save();
+
+            // Log the user out
+            req.logout(function (err) {
+            if (err) {
+            return res.status(500).json({ error: 'Failed to log out' });
+            }
+
+            // Redirect to login page
+            res.redirect('/login');
+
+
+        
+        })
+    }
+
+   
+})
 
 const port = process.env.PORT || 5000
 
