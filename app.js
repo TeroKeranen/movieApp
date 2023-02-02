@@ -353,6 +353,45 @@ app.post('/register', async (req,res) => {
     
 
 })
+app.get('/deleteAccount', (req,res) => {
+    res.render('deleteAccount', {title: "Delete account", error: "", logged:true})
+})
+
+// DeleteAccount option
+app.post('/deleteAccount', async (req,res) => {
+
+    const user = req.user; // get username
+    const id = req.user._id;    // user id
+    // take password inputs  
+    const password = req.body.password; 
+    const passwordRepeat = req.body.passwordRepeat;
+    
+    // compare user password inputs
+    if (password === passwordRepeat) {
+
+        // compare user password input to current password
+        const match = await bcrypt.compare(password, user.password);
+
+        if (!match) {
+            res.render('changepassword', {title: "Delete account", error: "Jotai meni väärin", logged:true})
+        } else {
+
+            User.findByIdAndDelete(id)
+                .then(result => {
+                    res.redirect('/register');
+                })
+                .catch(err => console.log(err))
+
+        }
+
+       
+        
+        
+    } else {
+        res.render('changepassword', {title: "Delete account", error: "Jotai meni väärin", logged:true})
+    }
+
+})
 
 app.get('/changepassword', (req,res) => {
 

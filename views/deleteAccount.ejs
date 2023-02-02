@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--  include head -->
+<%- include('./partials/head.ejs') %>
+
+    <body>
+
+        <!-- include navbar -->
+        <%- include('./partials/nav.ejs') %>
+
+            <main>
+                <section class="changepass-form">
+                    <form action="/deleteAccount" method="POST">
+
+                        <% if(error.length <=0) { %>
+
+                            <div class="error-message error-hide">
+                                <p>
+                                    <%= error %>
+                                </p>
+                            </div>
+
+                            <% } else { %>
+                                <div class="error-message">
+                                    <p>
+                                        <%= error %>
+                                    </p>
+                                </div>
+                                <% } %>
+
+                                    <h1>vaihda salasanasi</h1>
+
+                                    <div>
+                                        <label for="password">salasana:</label>
+                                        <input type="password" id="password" name="password" placeholder="old ppassword"
+                                            required>
+                                    </div>
+
+                                    <div>
+                                        <label for="passwordRepeat">Toista salasana</label>
+                                        <input type="password" id="passwordRepeat" name="passwordRepeat" placeholder="passwordRepeat"
+                                            required>
+                                    </div>
+
+
+                                    <button type="submit">vaihda salasana</button>
+                    </form>
+                </section>
+            </main>
+
+    </body>
+
+</html>
