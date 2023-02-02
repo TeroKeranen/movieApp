@@ -19,8 +19,13 @@
             <div class="movies">
                 <% for (let i=0; i < favMovies.length; i++) { %>
             
-                
+                    <form action="/delFav" method="post">
                         <div class="movie">
+                            <div class="fav-button">
+                                <input type="hidden" name="movieTitle" value="<%= movieTitle[i] %>">
+                                
+                                <button type="submit" name="movie">Poista</button>
+                            </div>
             
             
                             
@@ -40,7 +45,7 @@
                             </div>
                         </div>
                     
-            
+                    </form>
                     <% } %>
             </div>
         </div>

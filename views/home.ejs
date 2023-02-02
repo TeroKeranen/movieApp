@@ -34,8 +34,9 @@
                         <input type="hidden" name="moviePoster" value="<%= poster[i] %>">
                         <input type="hidden" name="movieVote" value="<%= vote[i] %>">
                         <input type="hidden" name="movieOverview" value="<%= overview[i] %>">
-                        <button type="submit" name="movie">add</button>
+                        <button class="fav-btn" type="submit" name="movie">lisää suosikkeihin</button>
                     </div>
+                    
                     <img src="https://image.tmdb.org/t/p/w500/<%=poster[i]%>" alt="Image" > 
                     
                     <div class="movie-info">

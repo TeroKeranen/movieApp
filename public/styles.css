@@ -193,6 +193,30 @@ section {
 
 /* 
 /////////////////////////////////////////////////////
+/// about pahe ///////////////////
+////////////////////////////////////////////////
+*/
+.about-article {
+    margin: 20px auto;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    
+
+}
+.about-article p {
+    margin: 20px auto;
+    width: 60%;
+}
+.tmdb-logo {
+    margin: 20px 0;
+    width: 200px;
+}
+/* 
+/////////////////////////////////////////////////////
 /// omatTiedot page ///////////////////
 ////////////////////////////////////////////////
 */
@@ -408,6 +432,17 @@ section {
     justify-content: center;
     width: 100%;
 }
+.fav-btn {
+    
+    background: rgb(207, 7, 7);
+    border: transparent;
+    font-size: 1.5rem;
+    
+    color: white;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
 
 .search-form form {
     margin: 0 auto;
@@ -517,7 +552,7 @@ section {
     bottom: 0;
     background-color: rgb(14, 13, 13);
     border: 1px solid white;
-    padding: 2rem;
+    
     color: white;
     max-height: 100%;
     transform: translateY(101%);

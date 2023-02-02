@@ -116,6 +116,7 @@ app.get('/home', isLoggedIn, (req,res) => {
     let user = req.user.username
     let message = `Tervetuloa ${user}`
     
+    
     if(!req.user) {
         res.render('login', {title: "Login", error: error, logged: false} )
     } else {
@@ -199,56 +200,6 @@ app.get('/setup', async (req,res) => {
     })
 })
 
-app.post('/fav', (req,res) => {
-
-    // get movie infos
-    let favTitle = req.body.movieTitle;
-    let favPoster = req.body.moviePoster;
-    let favVote = req.body.movieVote;
-    let favOverview = req.body.movieOverview;
-    
-    
-
-    
-
-    
-    // If try add movie in favorites page and that movie is there already it wont add it. Otherwise it will add movie in there
-    User.findOne({username: req.user.username}, (error, foundUser)=>{
-        if (error) {
-            console.log(error);
-            
-        } else {
-            const isInfavoriteMovies = foundUser.favoriteMovies.some(movie => movie.title === favTitle)
-
-            if (isInfavoriteMovies) {
-                console.log(`${favTitle} is already in favorite movies`)
-            } else {
-                foundUser.favoriteMovies.push({
-                    title: favTitle,
-                    poster: favPoster,
-                    vote: favVote,
-                    overview: favOverview,
-                })
-
-                foundUser.save((error) => {
-                    if (error) {
-                        console.log(error);
-                    } else {
-                        console.log("added to favmovies")
-                    }
-                })
-            }
-        }
-        res.redirect('/home')
-    })
-
-    
-
-   
-    
-    
-})
-
 app.get('/favorites', (req,res) => {
 
     let id = req.user.id;
@@ -269,6 +220,68 @@ app.get('/favorites', (req,res) => {
     
     res.render('favorites', {title:"My movies", logged: true, favMovies: movies, movieTitle:titles,vote:votes, overview:overviews, poster:posters, color:getColor  })
 
+})
+app.post('/fav', (req,res) => {
+
+    // get movie infos
+    let favTitle = req.body.movieTitle;
+    let favPoster = req.body.moviePoster;
+    let favVote = req.body.movieVote;
+    let favOverview = req.body.movieOverview;
+    let message = `Lisäsit elokuvan ${favTitle} suosikkeihin`
+    
+    const API_KEYs = process.env.API_KEY; // api key
+    const BASE_URL = "https://api.themoviedb.org/3"; // Api url
+    const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEYs; // this bring all the popular movies to page
+    
+    
+
+    
+    // If try add movie in favorites page and that movie is there already it wont add it. Otherwise it will add movie in there
+    User.findOne({username: req.user.username}, (error, foundUser)=>{
+        if (error) {
+            console.log(error);
+            
+        } else {
+            const isInfavoriteMovies = foundUser.favoriteMovies.some(movie => movie.title === favTitle)
+
+            if (isInfavoriteMovies) {
+                console.log(`${favTitle} is already in favorite movies`)
+                message = "Elokuva on jo suosikeissa"
+            } else {
+                foundUser.favoriteMovies.push({
+                    title: favTitle,
+                    poster: favPoster,
+                    vote: favVote,
+                    overview: favOverview,
+                })
+
+                foundUser.save((error) => {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log("added to favmovies")
+                        
+                    }
+                })
+            }
+        }
+        getMovies(API_URL,res,message)
+    })
+  
+    
+})
+
+app.post('/delFav', (req,res) => {
+    // take MovieTitle what user wants to delete
+    let title = req.body.movieTitle;
+
+    // get users database  and delete using $pull method
+    User.updateOne({username: req.user.username}, {$pull: {favoriteMovies: {title: title}}}, (err) => {
+        if (err) return res.status(400).send(err);
+        res.redirect('/favorites')
+  });
+    
 })
 
 // Login post. when logging in this will redirect you home page
