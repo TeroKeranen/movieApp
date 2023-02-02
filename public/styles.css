@@ -109,7 +109,8 @@ section {
     
 
 }
-.blur h1 {
+.blur h1,
+.blur h2 {
     padding: 0.5rem;
     font-size: 2rem;
     font-weight: 900;
@@ -117,52 +118,18 @@ section {
     
 
 }
-.index-secondS {
+.blur h2 {
+    
+}
+
+
+.second-article {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    
-    
-    
-}
-.index-secondS article {
-    padding: 1rem;
-    background: rgb(51, 78, 72);
-    color: var(--white);
-    border-radius: 10px;
-    margin: 10px;
-    
-
-    
-    
-}
-.index-secondS p {
-    
-    font-size: 1.3rem;
-    letter-spacing: 2px;
-    font-weight: 500;
-
-}
-
-.index-secondS h2 {
-    padding: 0.5rem;
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-
-
-}
-
-.index-secondS .secondsS-first {
     background-image: url(./av.jpg);
-    background-position: top;
-}
-
-.index-secondS .secondsS-second {
-    background-image: url(./av.jpg);
-    background-position: bottom;
-
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
 }
 
 
@@ -209,7 +176,11 @@ section {
 }
 .about-article p {
     margin: 20px auto;
-    width: 60%;
+    width: 80%;
+    padding: 1rem 0;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    font-weight: 500;
 }
 .tmdb-logo {
     margin: 20px 0;
@@ -590,6 +561,10 @@ section {
     margin-bottom: 30px;
     
 }
+.fav-btn:active {
+    background: white;
+    color: black;
+}
 
 
 @media screen and (min-width:785px) {
@@ -706,27 +681,10 @@ section {
 .blur {
     height: 500px;
 }
-.index-secondS {
+
+.second-article {
     flex-direction: row;
-    
 }
-
-.index-secondS article {
-    padding: 5rem 0;
-}
-
-.index-secondS .secondsS-first {
-    background-image: url(./av.jpg);
-    background-position:left top;
-    
-}
-
-.index-secondS .secondsS-second {
-    background-image: url(./av.jpg);
-    background-position:right bottom;
-    
-} 
-
 
  
     
