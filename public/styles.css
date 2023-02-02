@@ -462,9 +462,10 @@ section {
 .movie {
     width: 300px;
     margin: 1rem;
-    border-radius: 3px;
+    border-radius: 10px;
     box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
-    background-color: var(--secondary-color);
+    background-color: rgb(12, 12, 12);
+    padding: 0.5rem;
     position: relative;
     overflow: hidden;
 }
@@ -475,12 +476,13 @@ section {
 }
 
 .movie-info {
-    color: rgb(17, 17, 17);
+    color: rgb(238, 233, 233);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 1rem 1rem;
     letter-spacing: 0.5px;
+    
 }
 
 .movie-info h3 {
@@ -513,8 +515,10 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #fff;
+    background-color: rgb(14, 13, 13);
+    border: 1px solid white;
     padding: 2rem;
+    color: white;
     max-height: 100%;
     transform: translateY(101%);
     transition: transform 0.3s ease-in;
