@@ -26,17 +26,9 @@
         <% for (let i = 0; i < movieTitle.length; i++) { %>
 
             <form action="/fav" method="post">
+
                 <div class="movie">
-                    
-                    
-                    <div class="fav-button">
-                        <input type="hidden" name="movieTitle" value="<%= movieTitle[i] %>">
-                        <input type="hidden" name="moviePoster" value="<%= poster[i] %>">
-                        <input type="hidden" name="movieVote" value="<%= vote[i] %>">
-                        <input type="hidden" name="movieOverview" value="<%= overview[i] %>">
-                        <button class="fav-btn" type="submit" name="movie">lisää suosikkeihin</button>
-                    </div>
-                    
+                      
                     <img src="https://image.tmdb.org/t/p/w500/<%=poster[i]%>" alt="Image" > 
                     
                     <div class="movie-info">
@@ -44,10 +36,28 @@
                         <span class="<%=color(vote[i])%>"><%= vote[i] %></span>
                     </div>
                     
-                    <div class="overview">
-                        <%=overview[i] %>
+                    <div class="overview-container">
+
+                        <div class="info-button">
+
+                            <div class="overview">
+                                <p><%=overview[i] %></p>
+                            </div>
+                            
+                            <div class="fav-button">
+                                <input type="hidden" name="movieTitle" value="<%= movieTitle[i] %>">
+                                <input type="hidden" name="moviePoster" value="<%= poster[i] %>">
+                                <input type="hidden" name="movieVote" value="<%= vote[i] %>">
+                                <input type="hidden" name="movieOverview" value="<%= overview[i] %>">
+                                <button class="fav-btn" type="submit" name="movie">lisää suosikkeihin</button>
+                            </div>
+
+                        </div>
+
                     </div>
+
                 </div>
+
             </form>
             
         <% } %>

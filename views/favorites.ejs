@@ -21,31 +21,35 @@
             
                     <form action="/delFav" method="post">
                         <div class="movie">
-                            <div class="fav-button">
-                                <input type="hidden" name="movieTitle" value="<%= movieTitle[i] %>">
-                                
-                                <button type="submit" name="movie">Poista</button>
-                            </div>
-            
-            
-                            
+
                             <img src="https://image.tmdb.org/t/p/w500/<%=poster[i]%>" alt="Image">
             
                             <div class="movie-info">
-                                <h3>
-                                    <%= movieTitle[i] %>
-                                </h3>
-                                <span class="<%=color(vote[i])%>">
-                                    <%= vote[i] %>
-                                </span>
+                                <h3><%= movieTitle[i] %></h3>
+                                <span class="<%=color(vote[i])%>"><%= vote[i] %></span>
                             </div>
             
-                            <div class="overview">
-                                <%=overview[i] %>
+                            <div class="overview-container">
+                                                
+                                <div class="info-button">
+
+                                    <div class="overview">
+                                        <p><%=overview[i] %></p>
+                                    </div>
+                                    
+                                    <div class="fav-button">
+                                        <input type="hidden" name="movieTitle" value="<%= movieTitle[i] %>">
+                                        <button class="fav-btn" type="submit" name="movie">poista</button>
+                                    </div>
+
+                                </div>
+
                             </div>
+
                         </div>
                     
                     </form>
+
                     <% } %>
             </div>
         </div>

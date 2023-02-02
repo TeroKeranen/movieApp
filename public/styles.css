@@ -425,23 +425,8 @@ section {
     /////////////////////////////
 
     */
-.fav-button {
-    position: absolute;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-.fav-btn {
-    
-    background: rgb(207, 7, 7);
-    border: transparent;
-    font-size: 1.5rem;
-    
-    color: white;
-    margin-bottom: 30px;
-    border-radius: 10px;
-}
+
+
 
 
 .search-form form {
@@ -495,6 +480,7 @@ section {
 }
 
 .movie {
+    
     width: 300px;
     margin: 1rem;
     border-radius: 10px;
@@ -544,24 +530,55 @@ section {
 .movie-info span.red {
     color: red;
 }
-
-.overview {
+.overview-container {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgb(14, 13, 13);
-    border: 1px solid white;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgb(14, 13, 13);
+        border: 1px solid white;
     
-    color: white;
-    max-height: 100%;
-    transform: translateY(101%);
-    transition: transform 0.3s ease-in;
+        color: white;
+        height: 100%;
+        max-height: 100%;
+        transform: translateY(101%);
+        transition: transform 0.3s ease-in;
+}
+.info-button {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.overview {
+    margin: 40px 0;
+    width: 80%;
+    text-align: center;
 }
 
-.movie:hover .overview {
+.movie:hover .overview-container {
     transform: translateY(0);
 }
+.fav-button {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.fav-btn {
+
+    background: rgb(75, 68, 68);
+    border: transparent;
+    font-size: 1.5rem;
+    width: 100%;
+    border-radius: 0;
+    cursor: pointer;
+    color: white;
+    margin-bottom: 30px;
+    
+}
+
 
 @media screen and (min-width:785px) {
 
