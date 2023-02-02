@@ -60,6 +60,9 @@ section {
     display:block;
     padding: 0.5rem 1rem;
 }
+.links li a {
+    text-decoration: none;
+}
 
 .links {
     margin-right: 10px;

@@ -143,6 +143,17 @@ app.post("/home", (req,res) => {
     
 })
 
+app.get('/about', (req,res) => {
+    const isLogged = req.isAuthenticated();
+
+    if (!isLogged) {
+      res.render('about', {title: "About", logged: false})  
+    } else {
+
+        res.render('about', {title: "About", logged: true})
+    }
+})
+
 
 
 app.get('/login', isLoggedOut, (req,res) => {
