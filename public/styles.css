@@ -10,6 +10,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Roboto Slab', serif;
     
 }
 
@@ -27,7 +28,7 @@ main {
 section {
     
     text-align: center;
-    padding: 3rem;
+    padding: 2rem;
 }
 
 
@@ -79,8 +80,9 @@ section {
 .welcome-text {
     
     
-    background-image: url(./space.jpg.crdownload);
-    background-size: cover;
+    background-image: url(./inst2.jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
     background-position: center;
     color: rgb(253, 249, 249);
     border-radius: 10px;
@@ -88,17 +90,23 @@ section {
 .blur {
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
-    padding: 3rem;
     
+    border-radius : 10px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
-.welcome-text p {
-    padding: 0.5rem;
+.blur p {
+    padding: 1rem 0;
     font-size: 1.6rem;
     letter-spacing: 2px;
     font-weight: 500;
+    width: 80%;
+    
 
 }
-.welcome-text h1 {
+.blur h1 {
     padding: 0.5rem;
     font-size: 2rem;
     font-weight: 900;
@@ -113,13 +121,17 @@ section {
     align-items: center;
     
     
+    
 }
 .index-secondS article {
     padding: 1rem;
-    background: black;
+    background: rgb(51, 78, 72);
     color: var(--white);
     border-radius: 10px;
     margin: 10px;
+    
+
+    
     
 }
 .index-secondS p {
@@ -136,6 +148,17 @@ section {
     font-weight: 800;
     letter-spacing: 2px;
 
+
+}
+
+.index-secondS .secondsS-first {
+    background-image: url(./av.jpg);
+    background-position: top;
+}
+
+.index-secondS .secondsS-second {
+    background-image: url(./av.jpg);
+    background-position: bottom;
 
 }
 
@@ -603,6 +626,35 @@ section {
 ////////////////////////////////////////////////
 */
 
+
+/* 
+/////////////////////////////////
+/////index page /////////////////
+/////////////////////////////////
+*/
+.blur {
+    height: 500px;
+}
+.index-secondS {
+    flex-direction: row;
+    
+}
+
+.index-secondS article {
+    padding: 5rem 0;
+}
+
+.index-secondS .secondsS-first {
+    background-image: url(./av.jpg);
+    background-position:left top;
+    
+}
+
+.index-secondS .secondsS-second {
+    background-image: url(./av.jpg);
+    background-position:right bottom;
+    
+} 
 
 
  
