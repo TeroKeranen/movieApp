@@ -106,6 +106,7 @@ app.get("/", (req,res) => {
 
 // Home is for logged in users
 app.get('/home', isLoggedIn, (req,res) => {
+
     const API_KEYs = process.env.API_KEY; // api key
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
     const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEYs; // this bring all the popular movies to page
@@ -114,7 +115,7 @@ app.get('/home', isLoggedIn, (req,res) => {
 
     // use these to display welcome text including user name
     let user = req.user.username
-    let message = `Tervetuloa ${user}`
+    let message = `Welcome ${user}`
     
     
     if(!req.user) {
@@ -137,7 +138,7 @@ app.post("/home", (req,res) => {
     const IMG_URL = "https://image.tmdb.org/t/p/w500/"; // use this on home page when searching images
     
     let search = req.body.search
-    let message = `etsit hakusanalla ${search}`;
+    let message = `Search "${search}"`;
     
     
     getMovies(searchURL + '&query=' + search, res, message)
@@ -171,7 +172,7 @@ app.get('/omatTiedot', (req,res) => {
     let email = req.user.email;
     let registered = req.user.registeredDate;
     
-    res.render('omatTiedot', {title: "Omat tiedot", logged: true, userName: user, userEmail: email, userRegisterDate: registered })
+    res.render('omatTiedot', {title: "User info", logged: true, userName: user, userEmail: email, userRegisterDate: registered })
 })
 
 app.get('/setup', async (req,res) => {
@@ -228,7 +229,7 @@ app.post('/fav', (req,res) => {
     let favPoster = req.body.moviePoster;
     let favVote = req.body.movieVote;
     let favOverview = req.body.movieOverview;
-    let message = `Lisäsit elokuvan ${favTitle} suosikkeihin`
+    let message = `You added "${favTitle}" to your favorite list `
     
     const API_KEYs = process.env.API_KEY; // api key
     const BASE_URL = "https://api.themoviedb.org/3"; // Api url
@@ -246,8 +247,8 @@ app.post('/fav', (req,res) => {
             const isInfavoriteMovies = foundUser.favoriteMovies.some(movie => movie.title === favTitle)
 
             if (isInfavoriteMovies) {
-                console.log(`${favTitle} is already in favorite movies`)
-                message = "Elokuva on jo suosikeissa"
+                
+                message = "Movie is already on your favorite list"
             } else {
                 foundUser.favoriteMovies.push({
                     title: favTitle,
@@ -260,7 +261,7 @@ app.post('/fav', (req,res) => {
                     if (error) {
                         console.log(error);
                     } else {
-                        console.log("added to favmovies")
+                        
                         
                     }
                 })
@@ -315,16 +316,16 @@ app.post('/register', async (req,res) => {
     const nameExists = await User.exists({username: userName});
     const emailExists = await User.exists({email: userEmail})
     if(nameExists && emailExists) {
-        errorMessage = "Käyttäjänimi ja sähköpostiosoite on jo käytössä"
+        errorMessage = "Username and email address is already in use "
         res.render('register', {title:"Register",error: errorMessage, logged: false })
         return;
     } else if (emailExists) {
-        errorMessage = "Sähköpostiosoite on jo käytössä";
+        errorMessage = "Email address is already in use";
         res.render('register', {title:"Register",error: errorMessage, logged: false })
         return;
 
     } else if (nameExists) {
-        errorMessage = "Käyttäjänimi on jo käytössä"
+        errorMessage = "Username is already in use"
         res.render('register', {title:"Register",error: errorMessage, logged: false })
         return;
 
@@ -373,7 +374,7 @@ app.post('/deleteAccount', async (req,res) => {
         const match = await bcrypt.compare(password, user.password);
 
         if (!match) {
-            res.render('changepassword', {title: "Delete account", error: "Jotai meni väärin", logged:true})
+            res.render('changepassword', {title: "Delete account", error: "Something went wrong", logged:true})
         } else {
 
             User.findByIdAndDelete(id)
@@ -388,14 +389,14 @@ app.post('/deleteAccount', async (req,res) => {
         
         
     } else {
-        res.render('changepassword', {title: "Delete account", error: "Jotai meni väärin", logged:true})
+        res.render('changepassword', {title: "Delete account", error: "Something went wrong", logged:true})
     }
 
 })
 
 app.get('/changepassword', (req,res) => {
 
-    res.render('changepassword', {title: "Vaihda salasana", error: "", logged:true})
+    res.render('changepassword', {title: "Change password", error: "", logged:true})
 })
 
 app.post('/changepassword', async (req,res) => {
@@ -409,7 +410,7 @@ app.post('/changepassword', async (req,res) => {
     // Verify old password
     const match = await bcrypt.compare(oldPassword, user.password);
     if (!match) {
-        res.render('changepassword', {title: "Vaihda salasana", error: "Vanha salasana oli väärä", logged:true})
+        res.render('changepassword', {title: "Change password", error: "the old password was wrong", logged:true})
     } else {
          // Hash the new password
             const hash = await bcrypt.hash(newPassword, 10);

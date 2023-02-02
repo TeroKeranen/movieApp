@@ -9,7 +9,7 @@
         <%- include('./partials/nav.ejs') %>
 
             <main>
-                <section class="changepass-form">
+                <section class="deleteUser-form">
                     <form action="/deleteAccount" method="POST">
 
                         <% if(error.length <=0) { %>
@@ -28,17 +28,17 @@
                                 </div>
                                 <% } %>
 
-                                    <h1>vaihda salasanasi</h1>
+                                    <h1>Delete you account</h1>
 
                                     <div>
-                                        <label for="password">salasana:</label>
-                                        <input type="password" id="password" name="password" placeholder="old ppassword"
+                                        <label for="password">Password:</label>
+                                        <input type="password" id="password" name="password" placeholder="Password"
                                             required>
                                     </div>
 
                                     <div>
-                                        <label for="passwordRepeat">Toista salasana</label>
-                                        <input type="password" id="passwordRepeat" name="passwordRepeat" placeholder="passwordRepeat"
+                                        <label for="passwordRepeat">Repeat password</label>
+                                        <input type="password" id="passwordRepeat" name="passwordRepeat" placeholder="password repeat"
                                             required>
                                     </div>
 

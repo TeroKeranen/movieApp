@@ -279,8 +279,10 @@ section {
     border-radius: 10px;
     margin-bottom: 30px;
 }
-.login-form form, .register-form form,
-.changepass-form form {
+.login-form form,
+.register-form form,
+.changepass-form form,
+.deleteUser-form form {
     margin: 0 auto;
     width: 100%;
     padding: 50px 30px;
@@ -291,6 +293,7 @@ section {
 }
 
 .changepass-form form h1,
+.deleteUser-form form h1,
 .login-form form h1,
 .register-form form h1 {
     color: var(--white);
@@ -301,6 +304,7 @@ section {
 
 .login-form form label,
 .changepass-form form label,
+.deleteUser-form form label,
 .register-form form label {
     display:block;
     color: var(--white);
@@ -310,6 +314,7 @@ section {
 
 .login-form form input,
 .changepass-form form input,
+.deleteUser-form form input,
 .register-form form input {
     appearance: none;
     background: none;
@@ -319,6 +324,7 @@ section {
 
 .login-form form input,
 .changepass-form form input,
+.deleteUser-form form input,
 .register-form form input {
     display:block;
     width: 100%;
@@ -333,12 +339,14 @@ section {
 }
 .login-form form input::placeholder,
 .changepass-form form input::placeholder,
+.deleteUser-form form input::placeholder,
 .register-form form input::placeholder {
     color: var(--white)  
 }
 
 .login-form form input:focus,
 .changepass-form form input:focus,
+.deleteUser-form form input:focus,
 .register-form form input:focus{
     background-color: var(--white);
     box-shadow: 0px 6px 12px rgba(0,0,0,0.2);
@@ -346,6 +354,7 @@ section {
 
 .login-form form button,
 .changepass-form form button,
+.deleteUser-form form button,
 .register-form form button {
     display: block;
     border: none;
