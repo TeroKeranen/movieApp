@@ -28,7 +28,7 @@ main {
 section {
     
     text-align: center;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 
@@ -91,7 +91,7 @@ section {
     border-radius: 10px;
 }
 .blur {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     width: 100%;
     
     border-radius : 10px;
@@ -101,11 +101,12 @@ section {
     justify-content: center;
 }
 .blur p {
-    padding: 1rem 0;
+    margin: 20px 0;
+    padding: 1.5rem 0;
     font-size: 1.6rem;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     font-weight: 500;
-    width: 80%;
+    width: 90%;
     
 
 }
@@ -118,9 +119,6 @@ section {
     
 
 }
-.blur h2 {
-    
-}
 
 
 .second-article {
@@ -129,6 +127,7 @@ section {
     background-image: url(./av.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    border-radius: 10px;
     color: white;
 }
 
